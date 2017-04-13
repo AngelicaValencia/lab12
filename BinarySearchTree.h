@@ -69,7 +69,7 @@ template < class T >
 int BinarySearchTree<T>::getHeight()
 {
    //DO THIS
-
+   return getHeight(getRootNode());
 }
 
 template < class T >
@@ -77,7 +77,25 @@ int BinarySearchTree<T>::getHeight(TreeNode<T>* tNode)
 {
    //DO THIS
 
+   if (tNode == NULL)
+   {
+       return 0;
+   }
 
+   else
+   {
+       int left = getHeight(tNode->getLeft());
+       int right = getHeight(tNode->getRight());
+
+       if (left >= right)
+       {
+           return left + 1;
+       }
+       else
+       {
+          return right + 1;
+       }
+   }
 
 }
 
@@ -85,6 +103,8 @@ template < class T >
 bool BinarySearchTree<T>::isBalanced()
 {
    //DO THIS
+   bool bal = isBalanced(root);
+   return bal;
 
 }
 
@@ -92,10 +112,35 @@ template < class T >
 bool BinarySearchTree<T>::isBalanced(TreeNode<T>* tNode)
 {
    //DO THIS
+   if (tNode == NULL)
+   {
+       return true;
+   }
 
+   TreeNode<T>* left = tNode->getLeft();
+   TreeNode<T>* right = tNode->getRight();
 
+   bool left_bal = isBalanced(left);
+   if (left_bal == false)
+   {
+      return false;
+   }
 
+   bool right_bal = isBalanced(right);
+   if (right_bal == false)
+   {
+      return false;
+   }
 
+   int lh = getHeight(left);
+   int rh = getHeight(right);
+   if (abs(lh - rh) > 1)
+   {
+      return false;
+   }
+
+   return true;
+   
 }
 
 template < class T >
@@ -167,8 +212,8 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
       if (first < last)
       {
          //initial log computations using mid
-         double k_left = log(mid - first + 1)                   //log base 2 of the number of items to the left of mid (including mid)
-         double int_k_left = (int)(k_left + 0.5)            //same as above but rounded
+         double k_left =                    //log base 2 of the number of items to the left of mid (including mid)
+         double int_k_left =                //same as above but rounded
          double k_right =
          double int_k_right =
 
@@ -182,10 +227,7 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
             mid++;
             //DO THIS
             //try again with mid shifted one to the right
-			double k_left = log(mid - first + 1);                   //log base 2 of the number of items to the left of mid (including mid)
-         double int_k_left = (int)(k_left + 0.5);            //same as above but rounded
-         double k_right =
-         double int_k_right =
+
 
 
 
