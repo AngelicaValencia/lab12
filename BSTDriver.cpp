@@ -41,7 +41,6 @@ bool MyApp::OnInit()
    }
    delete iter;
    
-   /*
    //DO THIS
    //display the height of the binary search tree (not minimum height)
    //display whether the binary search tree is balanced (should not be balanced)
@@ -78,8 +77,9 @@ bool MyApp::OnInit()
 
 
 
-   //create a complete binary search tree
+      //create a complete binary search tree
    BinarySearchTree<CD>* complete_bst = bst->minimizeComplete();
+   BinarySearchTree<CD>* compBst = new BinarySearchTree<CD>(&CD::compare_items, &CD::compare_keys);
    delete bst;
 
    //make sure that an inorder traversal gives sorted order
@@ -89,24 +89,19 @@ bool MyApp::OnInit()
    {
       CD* cd = bst_iter->next();
       cd->displayCD();
+	  compBst->insert(cd);
    }
- //  delete bst_iter;
+   delete bst_iter;
 
    //DO THIS
    //display the height of the complete binary search tree (should be minimum height)
    //display whether the binary search tree is balanced (should be balanced)
-
-
-
-
-
-
-
-
-
+   
+   compBst = compBst->minimizeComplete();
+   cout << compBst->getHeight() << endl << endl;
+   cout << compBst->isBalanced();
    delete complete_bst;
 
-  */
    //delete cds;
    wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
    frame = new wxFrame((wxFrame *)NULL, -1,  wxT("AVL Tree"), wxPoint(500,500), wxSize(1100,600));
